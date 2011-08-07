@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+		<title>Test Barcode Scanner</title>
+		<script type="text/javascript" charset="UTF-8" src="lib/BarcodeScanner.js"></script>
+		<script type="text/javascript" charset="UTF-8" src="lib/phonegap-1.0.0.js"></script>
+	</head>
+	<body>
+		<input id="scan-btn" type="button" value="Scan" />
+		<div id="result"></div>
+		<div id="errCode"></div>
+		<script type="text/javascript">
+			document.addEventListener('deviceready', function(){
+				var btn = document.getElementById('scan-btn');
+				btn.onclick = function(){
+					BarcodeScanner.scan({
+						success: function( result ){
+							document.getElementById('result').innerHTML = result;
+						},
+						failure: function( err ){
+							document.getElementById('err').innerHTML = err;
+						}
+					});
+				};
+			}, true);
+		</script>
+	</body>
+</html>

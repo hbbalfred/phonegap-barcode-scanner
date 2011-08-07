@@ -1,0 +1,6 @@
+This plugin don't need install the barcode scanner application.
+It includes a mini-version of ZXing into source code, resources and settings.
+
+full download and import project in eclipse.
+change the assets/www/index.html to testing.
+
