@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.urenwu.phonegap.plugin.barcodenative;
+package com.urenwu.phonegap.plugin.barcodescanner;
 
 import org.json.JSONArray;
 //import org.json.JSONObject;
@@ -20,7 +20,7 @@ import com.phonegap.api.PluginResult.Status;
  * @author hbb
  *
  */
-public class BarcodeScannerPlugin extends Plugin
+public class BarcodeScanner extends Plugin
 {
 	
 	public static final int REQUEST_CODE = 0;
@@ -67,7 +67,7 @@ public class BarcodeScannerPlugin extends Plugin
 	 */
 	public void scan()
 	{
-	    Intent intentScan = new Intent("com.urenwu.phonegap.plugin.barcodenative.SCAN");
+	    Intent intentScan = new Intent("com.urenwu.phonegap.plugin.barcodescanner.SCAN");
 	    intentScan.addCategory(Intent.CATEGORY_DEFAULT);
 
 //	    // A null format means we scan for any type

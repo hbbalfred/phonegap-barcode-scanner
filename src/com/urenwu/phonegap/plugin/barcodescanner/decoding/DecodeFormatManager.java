@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.urenwu.phonegap.plugin.barcodenative.decoding;
+package com.urenwu.phonegap.plugin.barcodescanner.decoding;
 
 import java.util.Arrays;
 import java.util.List;

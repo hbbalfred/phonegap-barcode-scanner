@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.urenwu.phonegap.plugin.barcodenative.decoding;
+package com.urenwu.phonegap.plugin.barcodescanner.decoding;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.ResultPointCallback;
-import com.urenwu.phonegap.plugin.barcodenative.MyZXingActivity;
+import com.urenwu.phonegap.plugin.barcodescanner.UrenwuCaptureActivity;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -37,12 +37,12 @@ final class DecodeThread extends Thread {
 
   public static final String BARCODE_BITMAP = "barcode_bitmap";
 
-  private final MyZXingActivity activity;
+  private final UrenwuCaptureActivity activity;
   private final Hashtable<DecodeHintType, Object> hints;
   private Handler handler;
   private final CountDownLatch handlerInitLatch;
 
-  DecodeThread(MyZXingActivity activity,
+  DecodeThread(UrenwuCaptureActivity activity,
                Vector<BarcodeFormat> decodeFormats,
                String characterSet,
                ResultPointCallback resultPointCallback) {

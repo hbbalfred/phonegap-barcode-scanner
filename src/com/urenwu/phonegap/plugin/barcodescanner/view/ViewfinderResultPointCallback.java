@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.urenwu.phonegap.plugin.barcodenative.view;
+package com.urenwu.phonegap.plugin.barcodescanner.view;
 
 import com.google.zxing.ResultPoint;
 import com.google.zxing.ResultPointCallback;

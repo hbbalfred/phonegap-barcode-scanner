@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.urenwu.phonegap.plugin.barcodenative.camera;
+package com.urenwu.phonegap.plugin.barcodescanner.camera;
 
 import com.google.zxing.LuminanceSource;
 

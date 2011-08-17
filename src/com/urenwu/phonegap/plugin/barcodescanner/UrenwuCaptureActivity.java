@@ -1,4 +1,4 @@
-package com.urenwu.phonegap.plugin.barcodenative;
+package com.urenwu.phonegap.plugin.barcodescanner;
 
 import java.io.IOException;
 import java.util.Vector;
@@ -6,10 +6,10 @@ import java.util.Vector;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 
-import com.urenwu.phonegap.plugin.barcodenative.camera.CameraManager;
-import com.urenwu.phonegap.plugin.barcodenative.decoding.MyZXingActivityHandler;
-import com.urenwu.phonegap.plugin.barcodenative.decoding.InactivityTimer;
-import com.urenwu.phonegap.plugin.barcodenative.view.ViewfinderView;
+import com.urenwu.phonegap.plugin.barcodescanner.camera.CameraManager;
+import com.urenwu.phonegap.plugin.barcodescanner.decoding.UrenwuCaptureActivityHandler;
+import com.urenwu.phonegap.plugin.barcodescanner.decoding.InactivityTimer;
+import com.urenwu.phonegap.plugin.barcodescanner.view.ViewfinderView;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -26,9 +26,9 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 import android.view.SurfaceView;
 
-public class MyZXingActivity extends Activity implements Callback {
+public class UrenwuCaptureActivity extends Activity implements Callback {
 
-	private MyZXingActivityHandler handler;
+	private UrenwuCaptureActivityHandler handler;
 	private ViewfinderView viewfinderView;
 	private boolean hasSurface;
 	private Vector<BarcodeFormat> decodeFormats;
@@ -43,11 +43,11 @@ public class MyZXingActivity extends Activity implements Callback {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.main);
+		setContentView( BridgeR.get("R.layout.capture") );
 		// initialize CameraManager by application
 		CameraManager.init(getApplication());
 
-		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+		viewfinderView = (ViewfinderView) findViewById(BridgeR.get("R.id.viewfinder_view"));
 		hasSurface = false;
 		
 		// use a single thread to finish the activity with a timer
@@ -57,7 +57,7 @@ public class MyZXingActivity extends Activity implements Callback {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		SurfaceView surfaceView = (SurfaceView) findViewById(R.id.preview_view);
+		SurfaceView surfaceView = (SurfaceView) findViewById(BridgeR.get("R.id.preview_view"));
 		SurfaceHolder surfaceHolder = surfaceView.getHolder();
 		if (hasSurface) {
 			initCamera(surfaceHolder);
@@ -103,7 +103,7 @@ public class MyZXingActivity extends Activity implements Callback {
 			return;
 		}
 		if (handler == null) {
-			handler = new MyZXingActivityHandler(this, decodeFormats,
+			handler = new UrenwuCaptureActivityHandler(this, decodeFormats,
 					characterSet);
 		}
 	}
@@ -151,7 +151,7 @@ public class MyZXingActivity extends Activity implements Callback {
 		Intent intent = new Intent(getIntent().getAction());
 		intent.putExtra("SCAN_RESULT", obj.getText().toString());
 		
-		Message message = Message.obtain(handler, R.id.return_scan_result);
+		Message message = Message.obtain(handler, BridgeR.get("R.id.return_scan_result"));
 		message.obj = intent;
 		handler.sendMessageDelayed(message, 1000L);
 	}
@@ -166,8 +166,7 @@ public class MyZXingActivity extends Activity implements Callback {
 			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			mediaPlayer.setOnCompletionListener(beepListener);
 
-			AssetFileDescriptor file = getResources().openRawResourceFd(
-					R.raw.beep);
+			AssetFileDescriptor file = getResources().openRawResourceFd(BridgeR.get("R.raw.beep"));
 			try {
 				mediaPlayer.setDataSource(file.getFileDescriptor(),
 						file.getStartOffset(), file.getLength());

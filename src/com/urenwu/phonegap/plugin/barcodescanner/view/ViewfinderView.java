@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.urenwu.phonegap.plugin.barcodenative.view;
+package com.urenwu.phonegap.plugin.barcodescanner.view;
 
 import com.google.zxing.ResultPoint;
-import com.urenwu.phonegap.plugin.barcodenative.R;
-import com.urenwu.phonegap.plugin.barcodenative.camera.CameraManager;
+import com.urenwu.phonegap.plugin.barcodescanner.BridgeR;
+import com.urenwu.phonegap.plugin.barcodescanner.camera.CameraManager;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -62,11 +62,11 @@ public final class ViewfinderView extends View {
     // Initialize these once for performance rather than calling them every time in onDraw().
     paint = new Paint();
     Resources resources = getResources();
-    maskColor = resources.getColor(R.color.viewfinder_mask);
-    resultColor = resources.getColor(R.color.result_view);
-    frameColor = resources.getColor(R.color.viewfinder_frame);
-    laserColor = resources.getColor(R.color.viewfinder_laser);
-    resultPointColor = resources.getColor(R.color.possible_result_points);
+    maskColor = resources.getColor(BridgeR.get("R.color.viewfinder_mask"));
+    resultColor = resources.getColor(BridgeR.get("R.color.result_view"));
+    frameColor = resources.getColor(BridgeR.get("R.color.viewfinder_frame"));
+    laserColor = resources.getColor(BridgeR.get("R.color.viewfinder_laser"));
+    resultPointColor = resources.getColor(BridgeR.get("R.color.possible_result_points"));
     scannerAlpha = 0;
     possibleResultPoints = new HashSet<ResultPoint>(5);
   }

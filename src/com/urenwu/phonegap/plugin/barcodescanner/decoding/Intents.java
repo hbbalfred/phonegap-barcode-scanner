@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.urenwu.phonegap.plugin.barcodenative.decoding;
+package com.urenwu.phonegap.plugin.barcodescanner.decoding;
 
 /**
  * This class provides the constants to use when sending an Intent to Barcode Scanner.

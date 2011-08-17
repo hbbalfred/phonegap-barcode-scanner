@@ -10,7 +10,7 @@
     	android:layout_centerInParent="true"
     />
     
-    <com.urenwu.phonegap.plugin.barcodenative.view.ViewfinderView
+    <com.urenwu.phonegap.plugin.barcodescanner.view.ViewfinderView
     	android:id="@+id/viewfinder_view"
     	android:layout_width="fill_parent"
     	android:layout_height="fill_parent"

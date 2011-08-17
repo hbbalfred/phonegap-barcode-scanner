@@ -8,7 +8,7 @@ var BarcodeScanner = {
 		return PhoneGap.exec(
 				options.success,
 				options.failure,
-				'BarcodeScannerPlugin',
+				'BarcodeScanner',
 				'scan',
 				[]
 			);

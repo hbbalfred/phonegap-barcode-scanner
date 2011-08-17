@@ -1,0 +1,5 @@
+.Ds_Store
+.DS_Store
+bin/*
+
+gen/*

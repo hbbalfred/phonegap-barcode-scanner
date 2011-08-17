@@ -1,6 +1,27 @@
-This plugin don't need install the barcode scanner application.
-It includes a mini-version of ZXing into source code, resources and settings.
 
-full download and import project in eclipse.
-change the assets/www/index.html to testing.
+A phonegap plugin of Android.
+The plugin don't need to install the zxing barcode application.
+It includes a opimization of ZXing into project.
 
+Requirement
+phonegap 1.0+
+android 2.2+
+
+
+Install Steps
+copy BarcodeScanner.jar
+copy res/layout/capture.xml
+copy res/raw/bee.ogg
+copy res/values/colors.xml
+copy res/values/ids.xml
+copy assets/www/lib/BarcodeScanner.js
+
+
+Useage
+set manifest ( ref: AndroidManifest.xml )
+set plugins ( ref: res/xml/plugins.xml )
+set bridge ( ref: src/com/urenwu/phonegap/plugin/barcodescanner/BarcodeScannerActivity.java )
+js code ( ref: assets/www/index.html )
+
+
+You can also build the jar with Ant by build.xml

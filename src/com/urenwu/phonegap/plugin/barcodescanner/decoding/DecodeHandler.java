@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package com.urenwu.phonegap.plugin.barcodenative.decoding;
+package com.urenwu.phonegap.plugin.barcodescanner.decoding;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
 import com.google.zxing.MultiFormatReader;
 import com.google.zxing.ReaderException;
 import com.google.zxing.Result;
-import com.urenwu.phonegap.plugin.barcodenative.camera.CameraManager;
-import com.urenwu.phonegap.plugin.barcodenative.camera.PlanarYUVLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
-import com.urenwu.phonegap.plugin.barcodenative.MyZXingActivity;
-import com.urenwu.phonegap.plugin.barcodenative.R;
+import com.urenwu.phonegap.plugin.barcodescanner.camera.CameraManager;
+import com.urenwu.phonegap.plugin.barcodescanner.camera.PlanarYUVLuminanceSource;
+import com.urenwu.phonegap.plugin.barcodescanner.BridgeR;
+import com.urenwu.phonegap.plugin.barcodescanner.UrenwuCaptureActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,10 +39,10 @@ final class DecodeHandler extends Handler {
 
   private static final String TAG = DecodeHandler.class.getSimpleName();
 
-  private final MyZXingActivity activity;
+  private final UrenwuCaptureActivity activity;
   private final MultiFormatReader multiFormatReader;
 
-  DecodeHandler(MyZXingActivity activity, Hashtable<DecodeHintType, Object> hints) {
+  DecodeHandler(UrenwuCaptureActivity activity, Hashtable<DecodeHintType, Object> hints) {
     multiFormatReader = new MultiFormatReader();
     multiFormatReader.setHints(hints);
     this.activity = activity;
@@ -50,14 +50,10 @@ final class DecodeHandler extends Handler {
 
   @Override
   public void handleMessage(Message message) {
-    switch (message.what) {
-      case R.id.decode:
-        //Log.d(TAG, "Got decode message");
-        decode((byte[]) message.obj, message.arg1, message.arg2);
-        break;
-      case R.id.quit:
-        Looper.myLooper().quit();
-        break;
+    if(message.what == BridgeR.get("R.id.decode")){
+    	decode((byte[]) message.obj, message.arg1, message.arg2);
+    }else if(message.what == BridgeR.get("R.id.quit")){
+    	Looper.myLooper().quit();
     }
   }
 
@@ -85,14 +81,14 @@ final class DecodeHandler extends Handler {
     if (rawResult != null) {
       long end = System.currentTimeMillis();
       Log.d(TAG, "Found barcode (" + (end - start) + " ms):\n" + rawResult.toString());
-      Message message = Message.obtain(activity.getHandler(), R.id.decode_succeeded, rawResult);
+      Message message = Message.obtain(activity.getHandler(), BridgeR.get("R.id.decode_succeeded"), rawResult);
       Bundle bundle = new Bundle();
       bundle.putParcelable(DecodeThread.BARCODE_BITMAP, source.renderCroppedGreyscaleBitmap());
       message.setData(bundle);
       //Log.d(TAG, "Sending decode succeeded message...");
       message.sendToTarget();
     } else {
-      Message message = Message.obtain(activity.getHandler(), R.id.decode_failed);
+      Message message = Message.obtain(activity.getHandler(), BridgeR.get("R.id.decode_failed"));
       message.sendToTarget();
     }
   }
